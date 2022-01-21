@@ -1,0 +1,12 @@
+<?xml version="1.0" ?> 
+        <rsd version="1.0" xmlns="http://archipelago.phrasewise.com/rsd" >
+        <service>
+            <engineName>Serendipity (s9y)</engineName> 
+            <engineLink>http://www.s9y.org/</engineLink>
+            <homePageLink>http://www.blogaddict.de/</homePageLink>
+            <apis>
+                <api name="MetaWeblog" preferred="true"  apiLink="http://www.blogaddict.de/serendipity_xmlrpc.php" blogID="1" />
+                <api name="Blogger"    preferred="false" apiLink="http://www.blogaddict.de/serendipity_xmlrpc.php" blogID="1" />
+            </apis>
+        </service>
+        </rsd>

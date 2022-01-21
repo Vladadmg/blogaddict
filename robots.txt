@@ -1,0 +1,11 @@
+User-agent: larbin
+User-agent: psbot
+User-agent: Isnurancobot
+User-agent: TurnitinBot
+User-agent: ichiro
+User-agent: AboutUsBot
+Disallow: /
+
+User-agent: *
+Disallow: /autoren/
+

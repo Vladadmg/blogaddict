@@ -1,0 +1,516 @@
+<html>
+    <head>
+<!-- ADMIN-ENTRY TEMPLATE: index.tpl START -->
+        <title>Serendipity Verwaltungsoberfläche</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="http://www.blogaddict.de/serendipity_admin.css" />
+        <link rel="stylesheet" type="text/css" href="/templates/default/admin/pluginmanager.css" />
+
+        <script type="text/javascript">
+        
+        function spawn() {
+            if (self.Spawnextended) {
+                Spawnextended();
+            }
+
+            if (self.Spawnbody) {
+                Spawnbody();
+            }
+
+            if (self.Spawnnugget) {
+                Spawnnugget();
+            }
+        }
+
+        function SetCookie(name, value) {
+            var today  = new Date();
+            var expire = new Date();
+            expire.setTime(today.getTime() + (60*60*24*30));
+            document.cookie = 'serendipity[' + name + ']='+escape(value) + ';expires=' + expire.toGMTString();
+        }
+
+        function addLoadEvent(func) {
+          var oldonload = window.onload;
+          if (typeof window.onload != 'function') {
+            window.onload = func;
+          } else {
+            window.onload = function() {
+              oldonload();
+              func();
+            }
+          }
+        }
+        
+
+        </script>
+            <style type='text/css'>
+
+.serendipityAdminContent .serendipity_karmaVoting_links {
+    margin: 5px;
+}
+.serendipity_karmaVoting {
+    text-align: center;
+    font-size: 7pt;
+    margin: 0px;
+}
+
+.serendipity_karmaVoting a {
+    font-size: 7pt;
+    text-decoration: none;
+}
+
+.serendipity_karmaVoting a:hover {
+    color: green;
+}
+
+.serendipity_karmaError {
+    color: #FF8000;
+}
+.serendipity_karmaSuccess {
+    color: green;
+}
+.serendipity_karmaVoting_links,
+.serendipity_karmaVoting_links a:hover,
+.serendipity_karmaVoting_current-rating {
+    background: url(http://www.blogaddict.de/plugins/serendipity_event_karma/img/stars-def-yellow-red-sm.png) left;
+    font-size: 0;
+}
+.serendipity_karmaVoting_links {
+    position: relative;
+    width: 75px;
+    height: 5px;
+    overflow: hidden;
+    list-style: none;
+    margin: 0px auto;
+    padding: 0px;
+    background-position: left top;     
+    text-align: center;
+}
+.serendipity_karmaVoting_links li {
+   display: inline; 
+}
+.serendipity_karmaVoting_links a ,
+.serendipity_karmaVoting_current-rating {
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    text-indent: -9000em;
+    height: 5px;
+    line-height: 5px;
+    outline: none;
+    overflow: hidden;
+    border: none;
+}
+.serendipity_karmaVoting_links a:hover {
+    background-position: left bottom;
+}
+.serendipity_karmaVoting_links a.serendipity_karmaVoting_link1 {
+    width: 20%;
+    z-index: 6;
+}
+.serendipity_karmaVoting_links a.serendipity_karmaVoting_link2 {
+    width: 40%;
+    z-index: 5;
+}
+.serendipity_karmaVoting_links a.serendipity_karmaVoting_link3 {
+    width: 60%;
+    z-index: 4;
+}
+.serendipity_karmaVoting_links a.serendipity_karmaVoting_link4 {
+    width: 80%;
+    z-index: 3;
+}
+.serendipity_karmaVoting_links a.serendipity_karmaVoting_link5 {
+  width: 100%;
+    z-index: 2;
+}
+.serendipity_karmaVoting_links .serendipity_karmaVoting_current-rating {
+    z-index: 1;
+    background-position: left center;
+}
+
+.textbar, .textbar a, .textbar a:hover {
+    font-size: 100%;
+    position: relative;
+    background: none;
+}
+.serendipityAdminContent span.textbar {
+    color: black !important;
+}
+
+/* Overrides for diamonds-yellow-green-lg_png */
+.diamonds-yellow-green-lg_png 
+{
+  width: 140px;
+  height: 28px;
+}
+.diamonds-yellow-green-lg_png,
+.diamonds-yellow-green-lg_png a:hover,
+.diamonds-yellow-green-lg_png .serendipity_karmaVoting_current-rating
+{
+  background-image: url(plugins/serendipity_event_karma/img/diamonds-yellow-green-lg.png);
+}
+.diamonds-yellow-green-lg_png,
+.diamonds-yellow-green-lg_png a,
+.diamonds-yellow-green-lg_png .serendipity_karmaVoting_current-rating
+{
+  line-height: 28px;
+  height: 28px;
+}
+
+
+/* Overrides for diamonds-yellow-green-md_png */
+.diamonds-yellow-green-md_png 
+{
+  width: 105px;
+  height: 21px;
+}
+.diamonds-yellow-green-md_png,
+.diamonds-yellow-green-md_png a:hover,
+.diamonds-yellow-green-md_png .serendipity_karmaVoting_current-rating
+{
+  background-image: url(plugins/serendipity_event_karma/img/diamonds-yellow-green-md.png);
+}
+.diamonds-yellow-green-md_png,
+.diamonds-yellow-green-md_png a,
+.diamonds-yellow-green-md_png .serendipity_karmaVoting_current-rating
+{
+  line-height: 21px;
+  height: 21px;
+}
+
+
+/* Overrides for diamonds-yellow-green-sm_png */
+.diamonds-yellow-green-sm_png 
+{
+  width: 70px;
+  height: 14px;
+}
+.diamonds-yellow-green-sm_png,
+.diamonds-yellow-green-sm_png a:hover,
+.diamonds-yellow-green-sm_png .serendipity_karmaVoting_current-rating
+{
+  background-image: url(plugins/serendipity_event_karma/img/diamonds-yellow-green-sm.png);
+}
+.diamonds-yellow-green-sm_png,
+.diamonds-yellow-green-sm_png a,
+.diamonds-yellow-green-sm_png .serendipity_karmaVoting_current-rating
+{
+  line-height: 14px;
+  height: 14px;
+}
+
+
+/* Overrides for stars-def-green-yellow-lg_png */
+.stars-def-green-yellow-lg_png 
+{
+  width: 125px;
+  height: 25px;
+}
+.stars-def-green-yellow-lg_png,
+.stars-def-green-yellow-lg_png a:hover,
+.stars-def-green-yellow-lg_png .serendipity_karmaVoting_current-rating
+{
+  background-image: url(plugins/serendipity_event_karma/img/stars-def-green-yellow-lg.png);
+}
+.stars-def-green-yellow-lg_png,
+.stars-def-green-yellow-lg_png a,
+.stars-def-green-yellow-lg_png .serendipity_karmaVoting_current-rating
+{
+  line-height: 25px;
+  height: 25px;
+}
+
+
+/* Overrides for stars-def-green-yellow-md_png */
+.stars-def-green-yellow-md_png 
+{
+  width: 100px;
+  height: 20px;
+}
+.stars-def-green-yellow-md_png,
+.stars-def-green-yellow-md_png a:hover,
+.stars-def-green-yellow-md_png .serendipity_karmaVoting_current-rating
+{
+  background-image: url(plugins/serendipity_event_karma/img/stars-def-green-yellow-md.png);
+}
+.stars-def-green-yellow-md_png,
+.stars-def-green-yellow-md_png a,
+.stars-def-green-yellow-md_png .serendipity_karmaVoting_current-rating
+{
+  line-height: 20px;
+  height: 20px;
+}
+
+
+/* Overrides for stars-def-green-yellow-sm_png */
+.stars-def-green-yellow-sm_png 
+{
+  width: 75px;
+  height: 15px;
+}
+.stars-def-green-yellow-sm_png,
+.stars-def-green-yellow-sm_png a:hover,
+.stars-def-green-yellow-sm_png .serendipity_karmaVoting_current-rating
+{
+  background-image: url(plugins/serendipity_event_karma/img/stars-def-green-yellow-sm.png);
+}
+.stars-def-green-yellow-sm_png,
+.stars-def-green-yellow-sm_png a,
+.stars-def-green-yellow-sm_png .serendipity_karmaVoting_current-rating
+{
+  line-height: 15px;
+  height: 15px;
+}
+
+
+/* Overrides for stars-def-red-yellow-lg_png */
+.stars-def-red-yellow-lg_png 
+{
+  width: 125px;
+  height: 25px;
+}
+.stars-def-red-yellow-lg_png,
+.stars-def-red-yellow-lg_png a:hover,
+.stars-def-red-yellow-lg_png .serendipity_karmaVoting_current-rating
+{
+  background-image: url(plugins/serendipity_event_karma/img/stars-def-red-yellow-lg.png);
+}
+.stars-def-red-yellow-lg_png,
+.stars-def-red-yellow-lg_png a,
+.stars-def-red-yellow-lg_png .serendipity_karmaVoting_current-rating
+{
+  line-height: 25px;
+  height: 25px;
+}
+
+
+/* Overrides for stars-def-red-yellow-md_png */
+.stars-def-red-yellow-md_png 
+{
+  width: 100px;
+  height: 20px;
+}
+.stars-def-red-yellow-md_png,
+.stars-def-red-yellow-md_png a:hover,
+.stars-def-red-yellow-md_png .serendipity_karmaVoting_current-rating
+{
+  background-image: url(plugins/serendipity_event_karma/img/stars-def-red-yellow-md.png);
+}
+.stars-def-red-yellow-md_png,
+.stars-def-red-yellow-md_png a,
+.stars-def-red-yellow-md_png .serendipity_karmaVoting_current-rating
+{
+  line-height: 20px;
+  height: 20px;
+}
+
+
+/* Overrides for stars-def-red-yellow-sm_png */
+.stars-def-red-yellow-sm_png 
+{
+  width: 75px;
+  height: 15px;
+}
+.stars-def-red-yellow-sm_png,
+.stars-def-red-yellow-sm_png a:hover,
+.stars-def-red-yellow-sm_png .serendipity_karmaVoting_current-rating
+{
+  background-image: url(plugins/serendipity_event_karma/img/stars-def-red-yellow-sm.png);
+}
+.stars-def-red-yellow-sm_png,
+.stars-def-red-yellow-sm_png a,
+.stars-def-red-yellow-sm_png .serendipity_karmaVoting_current-rating
+{
+  line-height: 15px;
+  height: 15px;
+}
+
+
+/* Overrides for stars-def-yellow-green-lg_png */
+.stars-def-yellow-green-lg_png 
+{
+  width: 125px;
+  height: 25px;
+}
+.stars-def-yellow-green-lg_png,
+.stars-def-yellow-green-lg_png a:hover,
+.stars-def-yellow-green-lg_png .serendipity_karmaVoting_current-rating
+{
+  background-image: url(plugins/serendipity_event_karma/img/stars-def-yellow-green-lg.png);
+}
+.stars-def-yellow-green-lg_png,
+.stars-def-yellow-green-lg_png a,
+.stars-def-yellow-green-lg_png .serendipity_karmaVoting_current-rating
+{
+  line-height: 25px;
+  height: 25px;
+}
+
+
+/* Overrides for stars-def-yellow-green-md_png */
+.stars-def-yellow-green-md_png 
+{
+  width: 100px;
+  height: 20px;
+}
+.stars-def-yellow-green-md_png,
+.stars-def-yellow-green-md_png a:hover,
+.stars-def-yellow-green-md_png .serendipity_karmaVoting_current-rating
+{
+  background-image: url(plugins/serendipity_event_karma/img/stars-def-yellow-green-md.png);
+}
+.stars-def-yellow-green-md_png,
+.stars-def-yellow-green-md_png a,
+.stars-def-yellow-green-md_png .serendipity_karmaVoting_current-rating
+{
+  line-height: 20px;
+  height: 20px;
+}
+
+
+/* Overrides for stars-def-yellow-green-sm_png */
+.stars-def-yellow-green-sm_png 
+{
+  width: 75px;
+  height: 15px;
+}
+.stars-def-yellow-green-sm_png,
+.stars-def-yellow-green-sm_png a:hover,
+.stars-def-yellow-green-sm_png .serendipity_karmaVoting_current-rating
+{
+  background-image: url(plugins/serendipity_event_karma/img/stars-def-yellow-green-sm.png);
+}
+.stars-def-yellow-green-sm_png,
+.stars-def-yellow-green-sm_png a,
+.stars-def-yellow-green-sm_png .serendipity_karmaVoting_current-rating
+{
+  line-height: 15px;
+  height: 15px;
+}
+
+
+/* Overrides for stars-def-yellow-red-lg_png */
+.stars-def-yellow-red-lg_png 
+{
+  width: 125px;
+  height: 25px;
+}
+.stars-def-yellow-red-lg_png,
+.stars-def-yellow-red-lg_png a:hover,
+.stars-def-yellow-red-lg_png .serendipity_karmaVoting_current-rating
+{
+  background-image: url(plugins/serendipity_event_karma/img/stars-def-yellow-red-lg.png);
+}
+.stars-def-yellow-red-lg_png,
+.stars-def-yellow-red-lg_png a,
+.stars-def-yellow-red-lg_png .serendipity_karmaVoting_current-rating
+{
+  line-height: 25px;
+  height: 25px;
+}
+
+
+/* Overrides for stars-def-yellow-red-md_png */
+.stars-def-yellow-red-md_png 
+{
+  width: 100px;
+  height: 20px;
+}
+.stars-def-yellow-red-md_png,
+.stars-def-yellow-red-md_png a:hover,
+.stars-def-yellow-red-md_png .serendipity_karmaVoting_current-rating
+{
+  background-image: url(plugins/serendipity_event_karma/img/stars-def-yellow-red-md.png);
+}
+.stars-def-yellow-red-md_png,
+.stars-def-yellow-red-md_png a,
+.stars-def-yellow-red-md_png .serendipity_karmaVoting_current-rating
+{
+  line-height: 20px;
+  height: 20px;
+}
+
+
+/* Overrides for stars-def-yellow-red-sm_png */
+.stars-def-yellow-red-sm_png 
+{
+  width: 75px;
+  height: 15px;
+}
+.stars-def-yellow-red-sm_png,
+.stars-def-yellow-red-sm_png a:hover,
+.stars-def-yellow-red-sm_png .serendipity_karmaVoting_current-rating
+{
+  background-image: url(plugins/serendipity_event_karma/img/stars-def-yellow-red-sm.png);
+}
+.stars-def-yellow-red-sm_png,
+.stars-def-yellow-red-sm_png a,
+.stars-def-yellow-red-sm_png .serendipity_karmaVoting_current-rating
+{
+  line-height: 15px;
+  height: 15px;
+}
+
+
+</style>
+
+        </head>
+
+    <body id="serendipity_admin_page" onload="spawn()">
+        <table cellspacing="0" cellpadding="0" border="0" id="serendipityAdminFrame">
+
+                    <tr>
+                <td colspan="2" id="serendipityAdminBanner">
+                                    <h1>Serendipity Verwaltungsoberfläche</h1>
+                    <h2>Blogaddict</h2>
+                                </td>
+            </tr>
+            <tr>
+                <td colspan="2" id="serendipityAdminInfopane">
+                                    </td>
+            </tr>
+        
+            <tr valign="top">
+
+    
+                <td colspan="2" class="serendipityAdminContent">
+                    <div id="serendipityAdminWelcome" align="center">
+                        <h2>Willkommen zur Serendipity Administrationsoberfläche!</h2>
+                        <h3>Bitte geben Sie die Zugangsdaten ein.</h3>
+                        
+                    </div>
+                                        <form action="serendipity_admin.php" method="post">
+                        <input type="hidden" name="serendipity[action]" value="admin" />
+                        <table id="serendipityAdminCredentials" cellspacing="10" cellpadding="0" border="0" align="center">
+                            <tr>
+                                <td>Benutzername</td>
+                                <td><input class="input_textbox" type="text" name="serendipity[user]" /></td>
+                            </tr>
+                            <tr>
+                                <td>Passwort</td>
+                                <td><input class="input_textbox" type="password" name="serendipity[pass]" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><input class="input_checkbox" id="autologin" type="checkbox" name="serendipity[auto]" /><label for="autologin"> Daten speichern</label></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="right"><input type="submit" name="submit" value="Login &gt;" class="input_button serendipityPrettyButton" /></td>
+                            </tr>
+                            
+                        </table>
+                    </form>
+                    
+                    <p id="serendipityBackToBlog"><a href="/">Zurück zum Blog</a></p>
+                </td>
+            </tr>
+        </table>
+        <div class="serendipityAdminFooterSpacer">
+            <br />
+        </div>
+        <div id="serendipityAdminFooter">
+            <span>Betrieben mit Serendipity 1.3 und PHP 5.2.6</span>
+        </div>                            
+    </body>
+<!-- ADMIN-ENTRY TEMPLATE: index.tpl END -->
+</html>
